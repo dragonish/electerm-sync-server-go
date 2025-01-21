@@ -1,0 +1,19 @@
+version: "3.8"
+
+# Example
+volumes:
+  electerm-sync-server-data:
+
+services:
+  electerm-sync-server:
+    image: giterhub/electerm-sync-server:latest
+    container_name: electerm-sync-server
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      - "ELECTERM_JWT_SECRET=abcdef123"
+      - "ELECTERM_JWT_USERS=user1,user2"
+    ports:
+      - "7837:7837"
+    volumes:
+      - electerm-sync-server-data:/app/data
