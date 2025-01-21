@@ -1,0 +1,10 @@
+{
+	"internal": {
+		"prefix": "internalPackage",
+		"description": "Insert internal package",
+		"scope": "go",
+		"body": [
+			"\"electerm/internal/$1\"$0"
+		]
+	}
+}
