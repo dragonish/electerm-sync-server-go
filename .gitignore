@@ -30,3 +30,4 @@ go.work.sum
 /data
 
 /demo.sh
+/*.tar.gz
