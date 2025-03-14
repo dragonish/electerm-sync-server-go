@@ -45,4 +45,8 @@ func Apis(router *gin.Engine, authMiddleware *jwt.GinJWTMiddleware) {
 	router.GET("/test", func(ctx *gin.Context) {
 		ok(ctx, "ok")
 	})
+
+	router.NoRoute(func(ctx *gin.Context) {
+		notFound(ctx, "not found")
+	})
 }
