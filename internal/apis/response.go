@@ -9,19 +9,20 @@ import (
 )
 
 // ok makes a response to successful data.
-func ok(ctx *gin.Context, resData interface{}) {
-	ctx.JSON(http.StatusOK, resData)
+func ok(ctx *gin.Context, resData string) {
+	ctx.String(http.StatusOK, resData)
 }
 
-// okWithFile makes a file response to successful data.
-func okWithFile(ctx *gin.Context, filepath string) {
+// okWithJSONFile makes a file response to successful data.
+func okWithJSONFile(ctx *gin.Context, filepath string) {
 	ctx.Status(http.StatusOK)
+	ctx.Header("Content-Type", "application/json")
 	ctx.File(filepath)
 }
 
 // badRequest makes specific request error response.
 func badRequest(ctx *gin.Context, msg string) {
-	ctx.JSON(http.StatusBadRequest, errorResponse(msg))
+	ctx.String(http.StatusBadRequest, msg)
 }
 
 // badRequestWithParse makes a response that cannot parse the request.
@@ -32,19 +33,12 @@ func badRequestWithParse(ctx *gin.Context, err error) {
 
 // notFound makes a response with record not found.
 func notFound(ctx *gin.Context, msg string) {
-	ctx.JSON(http.StatusNotFound, errorResponse(msg))
+	ctx.String(http.StatusNotFound, msg)
 }
 
 // internalServerError makes an internal error response.
 func internalServerError(ctx *gin.Context, err error) {
-	ctx.JSON(http.StatusInternalServerError, errorResponse(logger.ErrMsg(err)))
-}
-
-// errorResponse generates body for error response.
-func errorResponse(msg string) gin.H {
-	return gin.H{
-		"message": msg,
-	}
+	ctx.String(http.StatusInternalServerError, logger.ErrMsg(err))
 }
 
 // parseRequestPath returns the path of the request.

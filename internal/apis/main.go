@@ -27,7 +27,7 @@ func Apis(router *gin.Engine, authMiddleware *jwt.GinJWTMiddleware) {
 	})
 
 	authGroup.POST("/sync", func(ctx *gin.Context) {
-		ok(ctx, "test ok")
+		ok(ctx, "ok")
 	})
 
 	authGroup.GET("/sync", func(ctx *gin.Context) {
@@ -36,7 +36,7 @@ func Apis(router *gin.Engine, authMiddleware *jwt.GinJWTMiddleware) {
 
 		filepath := store.Reader(id)
 		if len(filepath) > 0 {
-			okWithFile(ctx, filepath)
+			okWithJSONFile(ctx, filepath)
 		} else {
 			notFound(ctx, "not found")
 		}

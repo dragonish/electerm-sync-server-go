@@ -35,7 +35,7 @@ func Writer(id string, content interface{}) error {
 	return nil
 }
 
-// Reader reads content from the file.
+// Reader reads content from the JSON file.
 func Reader(id string) string {
 	filepath := model.STORE_DIR + "/" + id + ".json"
 	if isPathExists(filepath) {
