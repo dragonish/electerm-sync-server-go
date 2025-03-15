@@ -3,16 +3,14 @@ package apis
 import (
 	"electerm/internal/store"
 
-	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
 )
 
-func Apis(router *gin.Engine, authMiddleware *jwt.GinJWTMiddleware) {
-	authGroup := router.Group("/api", authMiddleware.MiddlewareFunc())
+func Apis(router *gin.Engine) {
+	authGroup := router.Group("/api", JWTMiddleware())
 
 	authGroup.PUT("/sync", func(ctx *gin.Context) {
-		claims := jwt.ExtractClaims(ctx)
-		id := claims["id"].(string)
+		id := ctx.GetString("id")
 		var body interface{}
 		if err := ctx.ShouldBindJSON(&body); err != nil {
 			badRequestWithParse(ctx, err)
@@ -31,9 +29,7 @@ func Apis(router *gin.Engine, authMiddleware *jwt.GinJWTMiddleware) {
 	})
 
 	authGroup.GET("/sync", func(ctx *gin.Context) {
-		claims := jwt.ExtractClaims(ctx)
-		id := claims["id"].(string)
-
+		id := ctx.GetString("id")
 		filepath := store.Reader(id)
 		if len(filepath) > 0 {
 			okWithJSONFile(ctx, filepath)
