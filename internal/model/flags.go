@@ -7,7 +7,6 @@ type Flags struct {
 	Port      uint16   // web service running port.
 	JWTSecret string   // JWT secret
 	JWTUsers  []string // JWT users
-	TimeError int8     // time error tolerance in seconds.
 }
 
 // GetPortStr returns port string.
