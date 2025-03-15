@@ -46,7 +46,6 @@ API URL: `http://<domain>:7837/api/sync`.
 | `ELECTERM_JWT_SECRET` | `string` | `""` | JWT secret |
 | `ELECTERM_JWT_USERS` | `string` | `""` | JWT users. Multiple users separated by comma(`,`) |
 | `ELECTERM_PORT` | `int` | `7837` | Web service running port |
-| `ELECTERM_TIME_ERROR` | `int` | `0` | Time error tolerance, unit: second |
 
 ## Credits
 
