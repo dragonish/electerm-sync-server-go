@@ -23,6 +23,7 @@ func Parse() {
 	logger.Info("web service running port", "port", flags.Port)
 	logger.Info("jwt secret", "secret", data.MaskWithStars(flags.JWTSecret))
 	logger.Info("jwt users", "users", flags.JWTUsers)
+	logger.Info("time error", "time_error", flags.TimeError)
 
 	global.Flags = flags
 }

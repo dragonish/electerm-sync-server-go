@@ -23,6 +23,7 @@ func parseEnvVars() (stor model.Flags) {
 	stor.Port = cfg.Port
 	stor.JWTSecret = cfg.JWTSecret
 	stor.JWTUsers = data.GetUsers(cfg.JWTUsers)
+	stor.TimeError = cfg.TimeError
 
 	return
 }

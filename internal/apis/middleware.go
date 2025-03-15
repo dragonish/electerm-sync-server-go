@@ -13,14 +13,15 @@ import (
 func InitParams() *jwt.GinJWTMiddleware {
 	return &jwt.GinJWTMiddleware{
 		Key:         []byte(global.Flags.JWTSecret),
-		Timeout:     time.Hour,
-		MaxRefresh:  time.Hour,
+		Timeout:     time.Minute * 15,
 		IdentityKey: "id",
 
 		Authorizator:  authorizator(),
 		TokenLookup:   "header: Authorization",
 		TokenHeadName: "Bearer",
-		TimeFunc:      time.Now,
+		TimeFunc: func() time.Time {
+			return time.Now().Add(time.Second * time.Duration(global.Flags.TimeError))
+		},
 	}
 }
 
