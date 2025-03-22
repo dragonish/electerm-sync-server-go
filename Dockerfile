@@ -1,4 +1,4 @@
-FROM golang:alpine3.21 AS Builder
+FROM golang:alpine3.21 AS builder
 
 RUN apk add git bash gcc musl-dev upx
 
@@ -16,7 +16,7 @@ RUN export BUILD_DATE=`date +%FT%T%z` && \
 RUN upx -9 -o electerm-sync-server.minify electerm-sync-server && mv electerm-sync-server.minify electerm-sync-server
 
 FROM alpine:3.21
-COPY --from=Builder /app/electerm-sync-server /bin/electerm-sync-server
+COPY --from=builder /app/electerm-sync-server /bin/electerm-sync-server
 
 EXPOSE 7837
 WORKDIR /app

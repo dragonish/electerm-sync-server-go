@@ -1,5 +1,5 @@
 ARG BASE_IMAGE
-FROM $BASE_IMAGE AS Builder
+FROM $BASE_IMAGE AS builder
 ARG VERSION
 ARG COMMIT
 RUN export BUILD_DATE=`date +%FT%T%z` && \
@@ -7,7 +7,7 @@ RUN export BUILD_DATE=`date +%FT%T%z` && \
 RUN upx -9 -o electerm-sync-server.minify electerm-sync-server && mv electerm-sync-server.minify electerm-sync-server
 
 FROM alpine:3.21
-COPY --from=Builder /app/electerm-sync-server /bin/electerm-sync-server
+COPY --from=builder /app/electerm-sync-server /bin/electerm-sync-server
 
 RUN echo '' > /etc/apk/repositories && \
   echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.21/main"         >> /etc/apk/repositories && \
