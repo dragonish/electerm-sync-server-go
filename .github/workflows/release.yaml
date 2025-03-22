@@ -4,6 +4,9 @@ on:
   push:
     tags:
       - '*'
+  workflow_dispatch:
+  repository_dispatch:
+    types: [pr-merged]
 
 env:
   DOCKERHUB_REPO: giterhub/electerm-sync-server

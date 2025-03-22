@@ -1,0 +1,19 @@
+name: Monitor Dependabot PR Merge
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          event-type: pr-merged
+          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
